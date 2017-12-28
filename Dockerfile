@@ -24,7 +24,9 @@ run conda update -y conda \
    && conda install -y pytorch torchvision -c pytorch \
    && pip install visdom dominate
 
-RUN apt install -y aptitude firefox vim-gnome
+RUN apt install -y aptitude epiphany-browser vim-gnome
+
+RUN echo `dbus-uuidgen` > /etc/machine-id 
 
 CMD [ "/bin/bash" ]
 
