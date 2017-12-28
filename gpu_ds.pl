@@ -9,7 +9,7 @@ $0 cmd options
 	valid commands:
 		build
 		run
-		   e.g. `anaconda_gpu.pl run` with backticks at the CLI
+		   e.g. `gpu_ds.pl run` with backticks at the CLI
 	options:
 EOS
 
@@ -26,14 +26,14 @@ $command = shift;
 if($command eq 'build')
 {
    
-   $cmd = "nvidia-docker build -t anaconda_gpu .";
+   $cmd = "nvidia-docker build -t gpu_ds .";
    execute($cmd);
 }
 elsif($command eq 'run')
 {
    $pwd = `pwd`;
    chomp $pwd;
-   $cmd = "nvidia-docker run --net=host --env=DISPLAY -v $ENV{HOME}/.Xauthority:/root/.Xauthority  -v $pwd:$pwd -w $pwd --rm -it anaconda_gpu";   
+   $cmd = "nvidia-docker run --net=host --env=DISPLAY -v $ENV{HOME}/.Xauthority:/root/.Xauthority  -v $pwd:$pwd -w $pwd --rm -it gpu_ds";   
 
    print "$cmd\n";
 }
