@@ -34,6 +34,10 @@ run conda update -y conda \
 
 RUN echo `dbus-uuidgen` > /etc/machine-id 
 
+RUN conda create -y --name keras-gpu --clone pytorch_TF_p36 \
+   && source activate keras-gpu \
+   && conda install -y -c anaconda keras-gpu jupyter matplotlib
+
 #ENTRYPOINT ["/usr/bin/tini", "--"]
 #ENTRYPOINT ["/bin/bash", "-c"]
 
