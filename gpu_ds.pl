@@ -33,7 +33,7 @@ elsif($command eq 'run')
 {
    $pwd = `pwd`;
    chomp $pwd;
-   $cmd = "nvidia-docker run --net=host --env=DISPLAY -v $ENV{HOME}/.Xauthority:/root/.Xauthority  -v $pwd:$pwd -w $pwd --rm -it gpu_ds";   
+   $cmd = "nvidia-docker run --net=host --env=DISPLAY -v $ENV{HOME}/.Xauthority:/root/.Xauthority  -v $pwd:$pwd -w $pwd --rm -it gpu_ds:latest";   
 
    print "$cmd\n";
 }

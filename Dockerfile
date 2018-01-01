@@ -2,6 +2,8 @@ FROM nvidia/cuda:8.0-cudnn6-devel
 
 MAINTAINER Hugo Latapie <hmlatapie@gmail.com>
 
+SHELL ["/bin/bash", "-c"]
+
 RUN apt update --fix-missing && apt install -y wget bzip2 ca-certificates \
     libglib2.0-0 libxext6 libsm6 libxrender1 \
     git mercurial subversion
@@ -20,15 +22,20 @@ RUN apt-get install -y curl grep sed dpkg && \
 
 ENV PATH /opt/conda/bin:$PATH
 
-run conda update -y conda \ 
-   && conda install -y pytorch torchvision -c pytorch \
-   && pip install visdom dominate
-
 RUN apt install -y aptitude epiphany-browser vim-gnome
 
-RUN pip install --ignore-installed --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.4.0-cp36-cp36m-linux_x86_64.whl
+run conda update -y conda \ 
+   && conda create -y --name pytorch_TF_p36 python=3.6 \
+   && source activate pytorch_TF_p36 \
+   && conda install -y pytorch torchvision -c pytorch \
+   && pip install visdom dominate \
+   && pip install --ignore-installed --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.4.0-cp36-cp36m-linux_x86_64.whl \
+   && conda install -y jupyter matplotlib
 
 RUN echo `dbus-uuidgen` > /etc/machine-id 
+
+#ENTRYPOINT ["/usr/bin/tini", "--"]
+#ENTRYPOINT ["/bin/bash", "-c"]
 
 CMD [ "/bin/bash" ]
 
