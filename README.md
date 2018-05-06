@@ -8,6 +8,6 @@ X11-based data science container with support for gpu anaconda-based pytorch. El
 ### list environments
 conda info --env
 ### select environment
-source activate <desired environment>
+source activate \<desired environment e.g. pytorch_TF_p36\>
 ### start notebook
 jupyter notebook --allow-root

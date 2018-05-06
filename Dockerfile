@@ -24,19 +24,20 @@ ENV PATH /opt/conda/bin:$PATH
 
 RUN apt install -y aptitude epiphany-browser vim-gnome
 
-run conda update -y conda \ 
+RUN conda update -y conda \ 
    && conda create -y --name pytorch_TF_p36 python=3.6 \
    && source activate pytorch_TF_p36 \
    && conda install -y pytorch torchvision -c pytorch \
    && pip install visdom dominate \
-   && pip install --ignore-installed --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.4.0-cp36-cp36m-linux_x86_64.whl \
-   && conda install -y jupyter matplotlib
+#   && pip install --ignore-installed --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.8.0-cp36-cp36m-linux_x86_64.whl \
+   && conda install -y jupyter matplotlib \
+   && conda install -y scikit-learn
 
-RUN echo `dbus-uuidgen` > /etc/machine-id 
+RUN echo `dbus-uuidgen` > /etc/machine-id  
 
-RUN conda create -y --name keras-gpu --clone pytorch_TF_p36 \
-   && source activate keras-gpu \
-   && conda install -y -c anaconda keras-gpu jupyter matplotlib
+#RUN conda create -y --name keras-gpu --clone pytorch_TF_p36 \
+#   && source activate keras-gpu \
+#   && conda install -y -c anaconda keras-gpu jupyter matplotlib
 
 #ENTRYPOINT ["/usr/bin/tini", "--"]
 #ENTRYPOINT ["/bin/bash", "-c"]
