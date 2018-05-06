@@ -4,7 +4,7 @@ MAINTAINER Hugo Latapie <hmlatapie@gmail.com>
 
 SHELL ["/bin/bash", "-c"]
 
-RUN apt update --fix-missing && apt install -y wget bzip2 ca-certificates \
+RUN apt update --fix-missing && apt upgrade -y && apt install -y wget bzip2 ca-certificates \
     libglib2.0-0 libxext6 libsm6 libxrender1 \
     git mercurial subversion
 
