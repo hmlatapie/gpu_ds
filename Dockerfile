@@ -1,4 +1,4 @@
-FROM nvidia/cuda:8.0-cudnn6-devel
+FROM nvidia/cuda:9.0-cudnn7-devel
 
 MAINTAINER Hugo Latapie <hmlatapie@gmail.com>
 
@@ -27,11 +27,14 @@ RUN apt install -y aptitude epiphany-browser vim-gnome
 RUN conda update -y conda \ 
    && conda create -y --name pytorch_TF_p36 python=3.6 \
    && source activate pytorch_TF_p36 \
-   && conda install -y pytorch torchvision -c pytorch \
+   && conda install -y pytorch torchvision cuda90 -c pytorch \
    && pip install visdom dominate \
-#   && pip install --ignore-installed --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.8.0-cp36-cp36m-linux_x86_64.whl \
    && conda install -y jupyter matplotlib \
-   && conda install -y scikit-learn
+   && conda install -y scikit-learn 
+
+RUN pip install --ignore-installed --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.8.0-cp36-cp36m-linux_x86_64.whl \
+   && pip install --upgrade pip \
+   && pip install keras
 
 RUN echo `dbus-uuidgen` > /etc/machine-id  
 
@@ -43,5 +46,4 @@ RUN echo `dbus-uuidgen` > /etc/machine-id
 #ENTRYPOINT ["/bin/bash", "-c"]
 
 CMD [ "/bin/bash" ]
-
 
