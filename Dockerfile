@@ -30,9 +30,8 @@ RUN conda update -y conda \
    && conda install -y pytorch torchvision cuda90 -c pytorch \
    && pip install visdom dominate \
    && conda install -y jupyter matplotlib \
-   && conda install -y scikit-learn 
-
-RUN pip install --ignore-installed --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.8.0-cp36-cp36m-linux_x86_64.whl \
+   && conda install -y scikit-learn \
+   && pip install --ignore-installed --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.8.0-cp36-cp36m-linux_x86_64.whl \
    && pip install --upgrade pip \
    && pip install keras
 
