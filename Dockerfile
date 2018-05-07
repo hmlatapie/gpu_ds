@@ -1,4 +1,6 @@
-FROM nvidia/cuda:9.0-cudnn7-devel
+# tensorflow (cuda9.0, cudnn7)
+#FROM nvidia/cuda:9.0-cudnn7-devel
+FROM nvidia/cuda:9.1-cudnn7-devel
 
 MAINTAINER Hugo Latapie <hmlatapie@gmail.com>
 
@@ -22,18 +24,21 @@ RUN apt-get install -y curl grep sed dpkg && \
 
 ENV PATH /opt/conda/bin:$PATH
 
-RUN apt install -y aptitude epiphany-browser vim-gnome
+RUN apt install -y aptitude epiphany-browser vim-gnome 
 
 RUN conda update -y conda \ 
+   && pip install cython \
+   && pip install --upgrade pip \ 
    && conda create -y --name pytorch_TF_p36 python=3.6 \
    && source activate pytorch_TF_p36 \
-   && conda install -y pytorch torchvision cuda90 -c pytorch \
+   && conda install -y pytorch torchvision cuda91 -c pytorch \
    && pip install visdom dominate \
    && conda install -y jupyter matplotlib \
-   && conda install -y scikit-learn \
-   && pip install --ignore-installed --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.8.0-cp36-cp36m-linux_x86_64.whl \
-   && pip install --upgrade pip \
-   && pip install keras
+   && conda install -y scikit-learn 
+
+#for tensorflow... need cuda9.0
+#   && pip install --ignore-installed --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.8.0-cp36-cp36m-linux_x86_64.whl \
+#   && pip install keras
 
 RUN echo `dbus-uuidgen` > /etc/machine-id  
 
