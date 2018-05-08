@@ -11,3 +11,6 @@ conda info --env
 source activate \<desired environment e.g. pytorch_TF_p36\>
 ### start notebook
 jupyter notebook --allow-root
+
+## notes
+currently holding pytorch back to 0.3.1 due to problems with 0.4.0

@@ -31,7 +31,7 @@ RUN conda update -y conda \
    && pip install --upgrade pip \ 
    && conda create -y --name pytorch_TF_p36 python=3.6 \
    && source activate pytorch_TF_p36 \
-   && conda install -y pytorch torchvision cuda91 -c pytorch \
+   && conda install -y pytorch=0.3.1 torchvision cuda91 -c pytorch \
    && pip install visdom dominate \
    && conda install -y jupyter matplotlib \
    && conda install -y scikit-learn 
