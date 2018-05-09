@@ -9,7 +9,7 @@ $0 cmd options
 	valid commands:
 		build
 		run
-		   e.g. `gpu_ds.pl run` with backticks at the CLI
+		   `gpu_ds_pytorch.pl run` with backticks at the CLI
 	options:
 EOS
 
@@ -26,14 +26,14 @@ $command = shift;
 if($command eq 'build')
 {
    
-   $cmd = "nvidia-docker build -t gpu_ds .";
+   $cmd = "nvidia-docker build -t gpu_ds_pytorch .";
    execute($cmd);
 }
 elsif($command eq 'run')
 {
    $pwd = `pwd`;
    chomp $pwd;
-   $cmd = "nvidia-docker run --net=host --env=DISPLAY -v $ENV{HOME}/.Xauthority:/root/.Xauthority  -v $pwd:$pwd -w $pwd --rm -it gpu_ds:latest";   
+   $cmd = "nvidia-docker run --net=host --env=DISPLAY -v $ENV{HOME}/.Xauthority:/root/.Xauthority  -v $pwd:$pwd -w $pwd --rm -it gpu_ds_pytorch:latest";   
 
    print "$cmd\n";
 }
